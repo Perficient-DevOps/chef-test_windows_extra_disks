@@ -13,8 +13,45 @@ verifier:
   name: inspec
 
 platforms:
-  - name: ubuntu-16.04
-  - name: centos-7
+  - name: mwrock/Windows2012R2
+    os_type: windows
+    transport:
+      name: winrm
+      elevated: true
+    driver:
+      gui: true
+      customize:
+        # memory: 2048
+        # cpus: 2
+        createhd:
+          - filename: /tmp/disk0.vdi
+            size: 512
+          - filename: ./tmp/disk1.vdi
+            size: 512
+          - filename: ./tmp/disk2.vdi
+            size: 512
+          - filename: ./tmp/disk3.vdi
+            size: 512
+        storagectl:
+          name: SATA Controller
+          add: sata
+        storageattach:
+          - storagectl: SATA Controller
+            port: 1
+            type:  hdd
+            medium: /tmp/disk0.vdi
+          - storagectl: SATA Controller
+            port: 2
+            type:  hdd
+            medium: ./tmp/disk1.vdi
+          - storagectl: SATA Controller
+            port: 3
+            type:  hdd
+            medium: ./tmp/disk2.vdi
+          - storagectl: SATA Controller
+            port: 4
+            type:  hdd
+            medium: ./tmp/disk3.vdi
 
 suites:
   - name: default

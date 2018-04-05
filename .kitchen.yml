@@ -24,7 +24,7 @@ platforms:
         # memory: 2048
         # cpus: 2
         createhd:
-          - filename: /tmp/disk0.vdi
+          - filename: ./tmp/disk0.vdi
             size: 512
           - filename: ./tmp/disk1.vdi
             size: 512
@@ -39,7 +39,7 @@ platforms:
           - storagectl: SATA Controller
             port: 1
             type:  hdd
-            medium: /tmp/disk0.vdi
+            medium: ./tmp/disk0.vdi
           - storagectl: SATA Controller
             port: 2
             type:  hdd

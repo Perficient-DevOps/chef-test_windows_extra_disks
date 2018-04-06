@@ -20,6 +20,8 @@ platforms:
       elevated: true
     driver:
       gui: true
+      synced_folders:
+        - ["/srv", "c:/vagrant"]
       customize:
         # memory: 2048
         # cpus: 2

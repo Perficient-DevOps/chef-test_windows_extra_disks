@@ -8,10 +8,9 @@
 powershell_script 'Initialize Drives' do
   code <<-EOH
   $drive = Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR
-  $drive = Get-Disk | Where NumberOfPartitions -eq 0
-  $drive |  New-Partition -DriveLetter 'F'  -Size 10MB | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Data" -Confirm:$false -AllocationUnitSize 65536
-  $drive |  New-Partition -DriveLetter 'G'  -Size 10MB | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Data" -Confirm:$false -AllocationUnitSize 65536
-  $drive |  New-Partition -DriveLetter 'H'  -Size 10MB | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Logs" -Confirm:$false -AllocationUnitSize 65536
-  $drive |  New-Partition -DriveLetter 'I'  -Size 10MB | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Temp" -Confirm:$false -AllocationUnitSize 65536
+  Get-Disk -Number 1 |  New-Partition -DriveLetter 'F'  -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Data" -Confirm:$false -AllocationUnitSize 65536
+  Get-Disk -Number 2 |  New-Partition -DriveLetter 'G'  -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Data" -Confirm:$false -AllocationUnitSize 65536
+  Get-Disk -Number 3 |  New-Partition -DriveLetter 'H'  -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Logs" -Confirm:$false -AllocationUnitSize 65536
+  Get-Disk -Number 4 |  New-Partition -DriveLetter 'I'  -UseMaximumSize | Format-Volume -FileSystem NTFS -NewFileSystemLabel "Temp" -Confirm:$false -AllocationUnitSize 65536
   EOH
 end
